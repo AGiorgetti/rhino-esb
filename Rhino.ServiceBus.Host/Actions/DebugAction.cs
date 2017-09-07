@@ -3,42 +3,40 @@ using Common.Logging;
 
 namespace Rhino.ServiceBus.Host.Actions
 {
-    public class DebugAction : IAction
-    {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+	public class DebugAction : IAction
+	{
+		private static readonly ILog Log = LogManager.GetLogger<DebugAction>();
 
-        public void Execute(ExecutingOptions options)
-        {
-            var host = new RhinoServiceBusHost();
-            host.SetArguments(options);
-            try
-            {
+		public void Execute(ExecutingOptions options)
+		{
+			var host = new RhinoServiceBusHost();
+			host.SetArguments(options);
+			try
+			{
 				host.DebugStart(new string[0]);
-            	bool keepGoing = true;
+				bool keepGoing = true;
 				while (keepGoing)
-            	{
+				{
 					Console.WriteLine("Enter 'cls' to clear the screen, 'q' to exit");
-            		var op = Console.ReadLine() ?? "";
-            		switch (op.ToLowerInvariant())
-            		{
+					var op = Console.ReadLine() ?? "";
+					switch (op.ToLowerInvariant())
+					{
 						case "q":
-            				keepGoing = false;
-            				break;
+							keepGoing = false;
+							break;
 						case "cls":
 							Console.Clear();
-            				break;
-            		}
-
-            	}
-                host.Stop();
-            }
-            catch (Exception e)
-            {
-                Log.Fatal("Host has crashed", e);
-                Console.WriteLine(e);
-                Console.ReadKey();
-            }
-            
-        }
-    }
+							break;
+					}
+				}
+				host.Stop();
+			}
+			catch (Exception e)
+			{
+				Log.Fatal("Host has crashed", e);
+				Console.WriteLine(e);
+				Console.ReadKey();
+			}
+		}
+	}
 }
