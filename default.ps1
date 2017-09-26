@@ -2,6 +2,7 @@ properties {
   $base_dir = resolve-path .
   $build_dir = "$base_dir\build"
   $packageinfo_dir = "$base_dir\packaging"
+  $45_build_dir = "$build_dir\4.5\"
   $40_build_dir = "$build_dir\4.0\"
   $35_build_dir = "$build_dir\3.5\"
   $lib_dir = "$base_dir\SharedLibs"
@@ -14,7 +15,7 @@ properties {
   $run_tests = $true
 }
 
-Framework "4.0"
+Framework "4.5.1"
 
 include .\psake_ext.ps1
 	
@@ -53,24 +54,30 @@ task Init -depends Clean {
 }
 
 task Compile -depends Init {
-  msbuild $sln_file /p:"OutDir=$35_build_dir;Configuration=$config;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\UAC\;Configuration=$config;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x86\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x86\UAC\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x64\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x64\UAC\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir;Configuration=$config;TargetFrameworkVersion=V4.0"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\UAC\;Configuration=$config;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x86\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.0"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x86\UAC\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x64\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.0"
-  msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x64\UAC\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /p:"OutDir=$35_build_dir;Configuration=$config;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\UAC\;Configuration=$config;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x86\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x86\UAC\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x64\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$35_build_dir\x64\UAC\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V3.5;LibDir=$35_lib_dir;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir;Configuration=$config;TargetFrameworkVersion=V4.0"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\UAC\;Configuration=$config;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x86\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.0"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x86\UAC\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x64\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.0"
+  #msbuild $sln_file /target:Rebuild /p:"OutDir=$40_build_dir\x64\UAC\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.0;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir;Configuration=$config;TargetFrameworkVersion=V4.5"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir\UAC\;Configuration=$config;TargetFrameworkVersion=V4.5;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir\x86\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.5"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir\x86\UAC\;Configuration=$config;Platform=x86;TargetFrameworkVersion=V4.5;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir\x64\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.5"
+  msbuild $sln_file /target:Rebuild /p:"OutDir=$45_build_dir\x64\UAC\;Configuration=$config;Platform=x64;TargetFrameworkVersion=V4.5;ApplicationManifest=$base_dir\Rhino.ServiceBus.manifest"
 }
 
 task Test -depends Compile -precondition { return $run_tests }{
   $old = pwd
   cd $build_dir
-  & $tools_dir\xUnit\xunit.console.clr4.exe "$build_dir\3.5\Rhino.ServiceBus.Tests.dll" /noshadow
+  & $tools_dir\xUnit\xunit.console.clr4.exe "$build_dir\4.5\Rhino.ServiceBus.Tests.dll" /noshadow
   cd $old		
 }
 
